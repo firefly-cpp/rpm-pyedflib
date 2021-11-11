@@ -6,13 +6,13 @@
 %global _description %{expand:
 pyEDFlib is a python library to read/write EDF+/BDF+ files based on EDFlib.
 EDF means European Data Format and was firstly published Kemp1992. 
-In 2003, an improved version of the file protokoll named EDF+ has 
+In 2003, an improved version of the file protocol named EDF+ has 
 been published and can be found at Kemp2003.}
 
 Name:           python-%{pretty_name}
 Version:        0.1.22
 Release:        1%{?dist}
-Summary:        pyedflib is a python library to read/write EDF+/BDF+ files based on EDFlib. 
+Summary:        Python library to read/write EDF+/BDF+ files, based on EDFlib 
 
 License:        BSD
 URL:            https://github.com/holgern/%{pretty_name}
@@ -51,7 +51,7 @@ Documentation for %{name}.
 %autosetup -p1 -n %{pretty_name}-%{version}
 
 %generate_buildrequires
-%pyproject_buildrequires -r
+%pyproject_buildrequires -t
 
 %build
 %pyproject_wheel
@@ -66,8 +66,7 @@ rm -rf doc/_build/html/{.doctrees,.buildinfo} -vf
 %pyproject_save_files pyedflib
 
 %check
-# Upstream provides no tests
-%pyproject_check_import
+%tox
 
 %files -n python3-%{pretty_name} -f %{pyproject_files}
 %license LICENSE
