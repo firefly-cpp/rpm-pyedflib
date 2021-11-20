@@ -21,6 +21,15 @@ Source0:        %{url}/archive/v%{version}/%{pretty_name}-%{version}.tar.gz
 # Use default Fedora version of numpy in order to avoid complications
 Patch0:         0001-Use-default-numpy-version.patch
 
+# Uses a forked copy of EDFlib (https://gitlab.com/Teuniz/EDFlib), which has
+# elected not to support big-endian architectures.
+ExcludeArch:    s390x
+
+# Uses a forked copy of EDFlib (https://gitlab.com/Teuniz/EDFlib)
+# https://github.com/holgern/pyedflib/issues/149
+# Version number: pyedflib/_extensions/c/edflib.c, EDFLIB_VERSION
+Provides:       bundled(edflib) = 1.17
+
 %description %_description
 
 %package -n python3-%{pretty_name}
